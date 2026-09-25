@@ -11,61 +11,72 @@
         android:id="@+id/tvTituloHistorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="105dp"
         android:text="Historial de Estudio"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="30dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
         android:id="@+id/tableHistorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
+        android:background="#000000"
         android:padding="1dp"
         android:stretchColumns="*"
-        android:background="#000000"
-        android:layout_marginHorizontal="16dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="80dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloHistorial">
 
-        <TableRow
-            android:background="#FFFFFF">
+        <TableRow android:background="#FFFFFF">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="#EEEEEE"
+                android:gravity="center"
+                android:padding="8dp"
                 android:text="ID"
-                android:padding="8dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_margin="1dp"
-                android:background="#EEEEEE"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="#EEEEEE"
+                android:gravity="center"
+                android:padding="8dp"
                 android:text="Ramo"
-                android:padding="8dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_margin="1dp"
-                android:background="#EEEEEE"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="#EEEEEE"
+                android:gravity="center"
+                android:padding="8dp"
                 android:text="Descripción"
-                android:padding="8dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_margin="1dp"
-                android:background="#EEEEEE"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tiempo"
-                android:padding="8dp"
-                android:textStyle="bold"
-                android:gravity="center"
                 android:layout_margin="1dp"
-                android:background="#EEEEEE"/>
+                android:background="#EEEEEE"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Tiempo"
+                android:textStyle="bold" />
         </TableRow>
 
     </TableLayout>

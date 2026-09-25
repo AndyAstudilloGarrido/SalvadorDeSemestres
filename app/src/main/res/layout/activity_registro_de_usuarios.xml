@@ -11,58 +11,82 @@
         android:id="@+id/tvTituloRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="97dp"
         android:text="Registro de Usuario"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="80dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/NombreUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
         android:hint="Nombre de usuario"
         android:inputType="text"
-        android:layout_marginHorizontal="24dp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="140dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloRegistro" />
 
     <EditText
         android:id="@+id/Gmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="24dp"
         android:hint="Gmail"
         android:inputType="textEmailAddress"
-        android:layout_marginHorizontal="24dp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="200dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NombreUsuario" />
 
     <EditText
         android:id="@+id/Contrasena"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="24dp"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:layout_marginHorizontal="24dp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="260dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Gmail" />
 
     <EditText
         android:id="@+id/Telefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:hint="Teléfono"
         android:inputType="phone"
-        android:layout_marginHorizontal="24dp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="320dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Contrasena" />
 
     <Button
         android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="145dp"
         android:text="Registrarse"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="400dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Telefono" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

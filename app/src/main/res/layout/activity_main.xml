@@ -11,34 +11,50 @@
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="33dp"
         android:text="SalvadorDeSemestres"
         android:textSize="32sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="41dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnIniciarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="139dp"
         android:text="Iniciar Sesión"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="420dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/btnRegistrarse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="152dp"
         android:text="Registrarse"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="491dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="205dp"
         android:layout_height="267dp"
-        app:srcCompat="@drawable/imagen_de_inicio"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="132dp" />
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="103dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
+        app:srcCompat="@drawable/imagen_de_inicio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

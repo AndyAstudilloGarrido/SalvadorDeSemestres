@@ -29,6 +29,10 @@
             android:name=".HistorialDeEstudio"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".InicioDeSesion"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
