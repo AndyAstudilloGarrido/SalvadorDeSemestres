@@ -1,4 +1,4 @@
-package com.example.salvadordesemestres;
+package com.example.salvadordesemestres.vistas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.salvadordesemestres.R;
 
 public class RegistroDeUsuarios extends AppCompatActivity {
 

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistorialDeEstudio">
+    tools:context=".vistas.HistorialDeEstudio">
 
     <TextView
         android:id="@+id/tvTituloHistorial"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:background="#EEEEEE"
+                android:background="#C8E6C9"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="ID"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:background="#EEEEEE"
+                android:background="#C8E6C9"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Ramo"
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:background="#EEEEEE"
+                android:background="#C8E6C9"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Descripción"
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:background="#EEEEEE"
+                android:background="#C8E6C9"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Tiempo"
@@ -80,5 +80,16 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/btnVolverHistorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="504dp"
+        android:text="Volver a estudiar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableHistorial" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
