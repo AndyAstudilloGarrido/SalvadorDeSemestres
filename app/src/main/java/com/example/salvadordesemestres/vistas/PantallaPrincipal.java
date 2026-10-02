@@ -71,7 +71,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
                 if (estaPausado) {
                     estaPausado = false;
-                    btnIniciarTimer.setText("PAUSAR");
+                    btnIniciarTimer.setText("Pausar");
                     iniciarCronometro(temaActual);
                     return;
                 }
@@ -87,7 +87,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                 int minutosInt = Integer.parseInt(minutosStr);
                 tiempoMilisegundos = minutosInt * 60000L;
 
-                btnIniciarTimer.setText("PAUSAR");
+                btnIniciarTimer.setText("Pausar");
                 iniciarCronometro(temaActual);
             }
         });
@@ -116,7 +116,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
                     ultimaDescrpcion = etDescripcionFinal.getText().toString().trim();
                     if (ultimaDescrpcion.isEmpty()) {
-                        ultimaDescrpcion = "Sin notas";
+                        ultimaDescrpcion = "no sabes que estudiaste";
                     }
 
                     String registro = ultimoTemaTerminado + " | " + ultimaDescrpcion + " | " + ultimoTiempoTerminado;
