@@ -23,6 +23,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        android.content.SharedPreferences preferencias = getSharedPreferences("MisSesiones", MODE_PRIVATE);
+        boolean estaLogueado = preferencias.getBoolean("estaLogueado", false);
+
+        if (estaLogueado){
+            Intent intent = new Intent(MainActivity.this, PantallaPrincipal.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

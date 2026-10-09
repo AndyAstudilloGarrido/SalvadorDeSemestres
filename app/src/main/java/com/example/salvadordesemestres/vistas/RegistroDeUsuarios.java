@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.salvadordesemestres.R;
+import com.example.salvadordesemestres.vistas.db.UsuarioContract;
 
 public class RegistroDeUsuarios extends AppCompatActivity {
 
@@ -50,14 +51,32 @@ public class RegistroDeUsuarios extends AppCompatActivity {
 
                 if (nombre.isEmpty() || correo.isEmpty() || contrasena.isEmpty() || telefono.isEmpty()){
                     Toast.makeText(RegistroDeUsuarios.this, "Por favor, completar todos los campos", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(RegistroDeUsuarios.this, "Registrado con exito", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(RegistroDeUsuarios.this);
+                android.database.sqlite.SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                android.content.ContentValues values = new android.content.ContentValues();
+                values.put(UsuarioContract.UsuarioEntry.COLUMN_NOMBRE, nombre);
+                values.put(UsuarioContract.UsuarioEntry.COLUMN_CORREO, correo);
+                values.put(UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA, contrasena);
+                values.put(UsuarioContract.UsuarioEntry.CLUMN_TELEFONO, telefono);
+
+                long newRowId = db.insert(UsuarioContract.UsuarioEntry.TABLE_NAME, null, values);
+
+                if (newRowId != -1){
+                    Toast.makeText(RegistroDeUsuarios.this, "Registrado con exito ", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(RegistroDeUsuarios.this, InicioDeSesion.class);
                     startActivity(intent);
-
                     finish();
+                } else {
+                    Toast.makeText(RegistroDeUsuarios.this, "Error: El correoo ya esta registrado", Toast.LENGTH_SHORT).show();
                 }
+
+                db.close();
+
             }
         });
     }
