@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SalvadorDeSemestres</string>
+
+    <string-array name="opciones_tiempo">
+        <item>1 minuto</item>
+        <item>15 minutos</item>
+        <item>25 minutos</item>
+        <item>45 minutos</item>
+        <item>60 minutos</item>
+    </string-array>
 </resources>
