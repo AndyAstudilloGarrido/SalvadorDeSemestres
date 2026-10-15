@@ -1,4 +1,4 @@
-package com.example.salvadordesemestres.vistas;
+package com.example.salvadordesemestres.vistas.vistas;
 
 import java.util.ArrayList;
 

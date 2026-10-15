@@ -34,4 +34,29 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
     }
+
+    public int actualizarContrasena(String correo, String nuevaContrasena){
+        SQLiteDatabase db = this.getWritableDatabase();
+        android.content.ContentValues values = new android.content.ContentValues();
+
+        values.put(UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA, nuevaContrasena);
+
+        String selection = UsuarioContract.UsuarioEntry.COLUMN_CORREO + " = ?";
+        String[] selectionArgs = { correo };
+
+        int count = db.update(UsuarioContract.UsuarioEntry.TABLE_NAME, values, selection, selectionArgs);
+        db.close();
+        return count;
+    }
+
+    public int eliminarUsuario(String correo){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selection = UsuarioContract.UsuarioEntry.COLUMN_CORREO + " = ?";
+        String[] selectionArgs = { correo };
+
+        int deleteRows = db.delete(UsuarioContract.UsuarioEntry.TABLE_NAME, selection, selectionArgs);
+        db.close();
+        return deleteRows;
+    }
 }

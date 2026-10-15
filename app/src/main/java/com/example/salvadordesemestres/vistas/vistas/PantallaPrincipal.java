@@ -1,5 +1,9 @@
-package com.example.salvadordesemestres.vistas;
+package com.example.salvadordesemestres.vistas.vistas;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -13,14 +17,16 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.salvadordesemestres.R;
 
-public class PantallaPrincipal extends AppCompatActivity {
+public class PantallaPrincipal extends AppCompatActivity implements SensorEventListener {
 
-    EditText etTemaEstudio, etMinutos, etDescripcionFinal;
+    EditText etTemaEstudio, etDescripcionFinal;
+    Spinner spinnerMinutos;
     TextView tvCronometro;
 
     Button btnIniciarTimer, btnIrHistorial, btnDetenerTimer, btnIrPerfil;
@@ -33,6 +39,11 @@ public class PantallaPrincipal extends AppCompatActivity {
     boolean estaPausado = false;
     long tiempoMilisegundos = 0;
     String temaActual = "";
+    String tiempoElegidoString = "";
+
+    private SensorManager sensorManager;
+    private Sensor acelerometro;
+    private long ultimaVezAgitado = 0;
 
 
     @Override
@@ -47,13 +58,18 @@ public class PantallaPrincipal extends AppCompatActivity {
         });
 
         etTemaEstudio = findViewById(R.id.etTemaEstudio);
-        etMinutos = findViewById(R.id.etMinutos);
+        spinnerMinutos = findViewById(R.id.spinnerMinutos);
         tvCronometro = findViewById(R.id.tvCronometro);
         btnIniciarTimer = findViewById(R.id.btnIniciarTimer);
         btnIrHistorial = findViewById(R.id.btnIrHistorial);
         btnDetenerTimer = findViewById(R.id.btnDetenerTimer);
         etDescripcionFinal = findViewById(R.id.etDescripcionFinal);
         btnIrPerfil = findViewById(R.id.btnIrPerfil);
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        if (sensorManager !=null){
+            acelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }
 
         etDescripcionFinal.setVisibility(View.GONE);
 
@@ -77,9 +93,13 @@ public class PantallaPrincipal extends AppCompatActivity {
                 }
 
                 String tema = etTemaEstudio.getText().toString().trim();
-                String minutosStr = etMinutos.getText().toString().trim();
+                String opcionElegida = spinnerMinutos.getSelectedItem().toString();
+                String minutosStr = opcionElegida.replace(" minutos", "");
+                minutosStr = minutosStr.replace(" minuto", "");
 
-                if (tema.isEmpty() || minutosStr.isEmpty()) {
+                tiempoElegidoString = minutosStr;
+
+                if (tema.isEmpty()) {
                     Toast.makeText(PantallaPrincipal.this, "Complete los campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -150,10 +170,10 @@ public class PantallaPrincipal extends AppCompatActivity {
                 tvCronometro.setText("00:00");
                 btnIniciarTimer.setText("Empezar a Estudiar");
                 ultimoTemaTerminado = temaActual;
-                ultimoTiempoTerminado = etMinutos.getText().toString() + " Minutos";
+                ultimoTiempoTerminado = tiempoElegidoString + " Minutos";
                 etDescripcionFinal.setVisibility(View.VISIBLE);
                 DatosGlobales.totalSesiones++;
-                DatosGlobales.totalMinutos = DatosGlobales.totalMinutos + Integer.parseInt(etMinutos.getText().toString().trim());
+                DatosGlobales.totalMinutos = DatosGlobales.totalMinutos + Integer.parseInt(tiempoElegidoString);
                 Toast.makeText(PantallaPrincipal.this, "Terminaste de estudiar: " + tema , Toast.LENGTH_SHORT).show();
             }
 
@@ -175,5 +195,46 @@ public class PantallaPrincipal extends AppCompatActivity {
 
         String tiempoFormateado = String.format("%02d:%02d", minutos , segundos);
         tvCronometro.setText((tiempoFormateado));
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+
+            double aceleracionG = Math.sqrt(x * x + y * y + z * z) / SensorManager.GRAVITY_EARTH;
+
+            if (aceleracionG > 2.5) {
+                long tiempoActual = System.currentTimeMillis();
+
+                if (tiempoActual - ultimaVezAgitado > 3000) {
+                    ultimaVezAgitado = tiempoActual;
+
+                    Toast.makeText(this, "Calmate todo esta bien, respira", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (acelerometro != null) {
+            sensorManager.registerListener(this, acelerometro, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (sensorManager != null) {
+            sensorManager.unregisterListener(this);
+        }
     }
 }

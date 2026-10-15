@@ -1,6 +1,5 @@
-package com.example.salvadordesemestres.vistas;
+package com.example.salvadordesemestres.vistas.vistas;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
