@@ -17,6 +17,9 @@ import com.example.salvadordesemestres.vistas.db.UsuarioDbHelper;
 
 public class CambiarClave extends AppCompatActivity {
 
+    EditText etClaveNueva;
+    Button btnGuardarClave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +31,8 @@ public class CambiarClave extends AppCompatActivity {
             return insets;
 
         });
-        EditText etClaveNueva = findViewById(R.id.etNuevaContrasena);
-        Button btnGuardarClave = findViewById(R.id.btnActualizarClave);
+        etClaveNueva = findViewById(R.id.etNuevaContrasena);
+        btnGuardarClave = findViewById(R.id.btnActualizarClave);
 
         UsuarioDbHelper dbHelper = new UsuarioDbHelper(this);
 

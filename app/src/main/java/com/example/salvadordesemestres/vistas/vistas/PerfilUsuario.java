@@ -3,7 +3,9 @@ package com.example.salvadordesemestres.vistas.vistas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,11 @@ public class PerfilUsuario extends AppCompatActivity {
 
     TextView tvTotalSesiones;
     TextView tvTotalMinutos;
+
+    Button btnCerrarSesion;
+    Button btnVolver;
+    Button btnActualizarClave;
+    Button btnEliminarCuenta;
 
 
     @Override
@@ -32,6 +39,11 @@ public class PerfilUsuario extends AppCompatActivity {
 
         tvTotalSesiones = findViewById(R.id.tvTotalSesiones);
         tvTotalMinutos = findViewById(R.id.tvTotalMinutos);
+        btnVolver = findViewById(R.id.btnVolverPerfil);
+        btnActualizarClave = findViewById(R.id.btnActualizarClave);
+        btnEliminarCuenta = findViewById(R.id.btnEliminarCuenta);
+        btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+
 
         Intent intent = getIntent();
 
@@ -41,7 +53,7 @@ public class PerfilUsuario extends AppCompatActivity {
         tvTotalSesiones.setText("Sesiones completas: " + sesiones);
         tvTotalMinutos.setText("Minutos estudiados: " + minutos);
 
-        android.widget.Button btnVolver = findViewById(R.id.btnVolverPerfil);
+
         btnVolver.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(android.view.View v){
@@ -52,8 +64,7 @@ public class PerfilUsuario extends AppCompatActivity {
         android.content.SharedPreferences preferencias = getSharedPreferences("MisSesiones", MODE_PRIVATE);
         String correoActual = preferencias.getString("correoUsuario", "");
 
-        android.widget.Button btnActualizarClave = findViewById(R.id.btnActualizarClave);
-        android.widget.Button btnEliminarCuenta = findViewById(R.id.btnEliminarCuenta);
+
         com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(this);
 
         btnActualizarClave.setOnClickListener(new android.view.View.OnClickListener() {
@@ -86,6 +97,22 @@ public class PerfilUsuario extends AppCompatActivity {
                         .setNegativeButton("Cancelar", null)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
+            }
+        });
+
+        btnCerrarSesion.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(android.view.View v) {
+                preferencias.edit().clear().apply();
+
+                android.widget.Toast.makeText(PerfilUsuario.this, "Cerrando sesión", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PerfilUsuario.this, MainActivity.class);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                startActivity(intent);
+                finish();
+
             }
         });
     }

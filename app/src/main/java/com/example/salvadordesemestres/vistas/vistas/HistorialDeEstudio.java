@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.example.salvadordesemestres.R;
 public class HistorialDeEstudio extends AppCompatActivity {
 
     TableLayout tablaHistorial;
+    Button btnVolver;
 
     static int contadorID = 1;
 
@@ -35,6 +37,7 @@ public class HistorialDeEstudio extends AppCompatActivity {
         });
 
         tablaHistorial = findViewById(R.id.tableHistorial);
+        btnVolver = findViewById(R.id.btnVolverHistorial);
 
         for (int i = 0; i < DatosGlobales.historialCompleto.size(); i++){
             String registroString = DatosGlobales.historialCompleto.get(i);
@@ -49,7 +52,7 @@ public class HistorialDeEstudio extends AppCompatActivity {
             }
         }
 
-        android.widget.Button btnVolver = findViewById(R.id.btnVolverHistorial);
+
         btnVolver.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(android.view.View v){
