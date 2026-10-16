@@ -47,48 +47,58 @@ public class InicioDeSesion extends AppCompatActivity{
                 String contrasena = etContrasena.getText().toString().trim();
 
                 if (correo.isEmpty() || contrasena.isEmpty()){
-                    Toast.makeText(InicioDeSesion.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InicioDeSesion.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(InicioDeSesion.this);
-                android.database.sqlite.SQLiteDatabase db = dbHelper.getReadableDatabase();
+                Toast.makeText(InicioDeSesion.this, "Verificando datos", Toast.LENGTH_SHORT).show();
 
-                String [] projection = {
-                  UsuarioContract.UsuarioEntry._ID
-                };
+                java.util.concurrent.ExecutorService executor = java.util.concurrent.Executors.newSingleThreadExecutor();
+                android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
 
-                String selection = UsuarioContract.UsuarioEntry.COLUMN_CORREO + " = ? AND "+
-                        UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA + " = ?";
+                executor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(InicioDeSesion.this);
+                        android.database.sqlite.SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-                String[] selectionArgs = { correo, contrasena};
+                        String[] projection = { com.example.salvadordesemestres.vistas.db.UsuarioContract.UsuarioEntry._ID };
+                        String selection = com.example.salvadordesemestres.vistas.db.UsuarioContract.UsuarioEntry.COLUMN_CORREO + " = ? AND " +
+                                com.example.salvadordesemestres.vistas.db.UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA + " = ?";
+                        String[] selectionArgs = { correo, contrasena };
 
-                android.database.Cursor cursor = db.query(
-                  UsuarioContract.UsuarioEntry.TABLE_NAME,
-                  projection,
-                  selection,
-                  selectionArgs,
-                  null, null, null
-                );
+                        android.database.Cursor cursor = db.query(
+                                com.example.salvadordesemestres.vistas.db.UsuarioContract.UsuarioEntry.TABLE_NAME,
+                                projection, selection, selectionArgs, null, null, null
+                        );
 
-                if (cursor.getCount() > 0){
-                    Toast.makeText(InicioDeSesion.this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
+                        final boolean existeUsuario = cursor.getCount() > 0;
 
-                    android.content.SharedPreferences preferences = getSharedPreferences("MisSesiones", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putBoolean("estaLogueado", true);
-                    editor.putString("correoUsuario", correo);
-                    editor.apply();
+                        cursor.close();
+                        db.close();
 
-                    Intent intent = new Intent(InicioDeSesion.this, PantallaPrincipal.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(InicioDeSesion.this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-                }
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (existeUsuario) {
+                                    android.content.SharedPreferences preferencias = getSharedPreferences("MisSesiones", MODE_PRIVATE);
+                                    android.content.SharedPreferences.Editor editor = preferencias.edit();
+                                    editor.putBoolean("estaLogueado", true);
+                                    editor.putString("correoUsuario", correo);
+                                    editor.apply();
 
-                cursor.close();
-                db.close();
+                                    Toast.makeText(InicioDeSesion.this, "Iniciando sesion", Toast.LENGTH_SHORT).show();
+
+                                    android.content.Intent intent = new android.content.Intent(InicioDeSesion.this, PantallaPrincipal.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(InicioDeSesion.this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                });
             }
         });
     }
