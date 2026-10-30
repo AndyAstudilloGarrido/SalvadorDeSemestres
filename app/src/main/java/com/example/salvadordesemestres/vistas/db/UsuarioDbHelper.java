@@ -20,6 +20,9 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + UsuarioContract.UsuarioEntry.TABLE_NAME;
 
+
+    /**
+     * */
     public UsuarioDbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

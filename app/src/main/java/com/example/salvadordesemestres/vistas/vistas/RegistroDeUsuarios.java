@@ -41,6 +41,12 @@ public class RegistroDeUsuarios extends AppCompatActivity {
         etTelefono = findViewById(R.id.Telefono);
         btnRegistrar = findViewById(R.id.btnRegistrar);
 
+        /**
+         * Captura los datos ingresados y realiza un Insert a SQLite.
+         * @param v La vista que fue pulsada
+         * @return void No retorna ningún valor.
+         * @throws Posible error interno si el correo ya existe
+         */
         btnRegistrar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

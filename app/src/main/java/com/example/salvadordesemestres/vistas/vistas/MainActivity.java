@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
         btnRegistrarse = findViewById(R.id.btnRegistrarse);
 
+        /**
+         * se encarga del evento del botón de registro al pulsar el boton nos dirige a la layout de regristro
+         * @param v la vista (botón) que fue pulsado
+         * @return void no retorna valor alguno.
+         * @throws no cuenta con exceptiones controladas
+         */
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -49,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * se encarga del evento del botón de inicio de sesión al pulsar el boton nos dirige a la layout de inicio de sesión
+         * @param v la vista (botón) que fue pulsado
+         * @return void no retorna valor alguno.
+         * @throws no cuenta con exceptiones controladas
+         */
         btnIniciarSesion.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

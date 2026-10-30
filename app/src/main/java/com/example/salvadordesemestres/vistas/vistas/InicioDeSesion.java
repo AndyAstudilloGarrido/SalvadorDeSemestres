@@ -16,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.salvadordesemestres.R;
 import com.example.salvadordesemestres.vistas.db.UsuarioContract;
+/**
+ * se encarga de autenticar a los usuarios registrados utilizando hilos secuandarios en las consultas a SQLite.
+ */
 
 public class InicioDeSesion extends AppCompatActivity{
 
@@ -41,6 +44,15 @@ public class InicioDeSesion extends AppCompatActivity{
         btnEntrar = findViewById(R.id.btnEntrar);
 
         btnEntrar.setOnClickListener(new View.OnClickListener(){
+
+            /**
+             * Evento que lanza un hilo secundario para verificar el correo y contraseña
+             * en la base de datos sin congelar la UI
+             *
+             * @param v La vista que fue pulsada
+             * @return void no retorna valor alguno
+             * @throws Exception No lanza excepciones controladas.
+             */
             @Override
             public void onClick(View v){
                 String correo = etCorreo.getText().toString().trim();

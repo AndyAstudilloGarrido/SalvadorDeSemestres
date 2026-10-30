@@ -72,7 +72,12 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
         }
 
         etDescripcionFinal.setVisibility(View.GONE);
-
+        /**
+         * Gestiona el inicio y pausa del cronómetro y cambia el estado visual del botón
+         * @param v La vista (botón) que fue pulsado
+         * @return void No retorna valor alguno
+         * @throws No lanza excepciones controladas
+         */
         btnIniciarTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +117,13 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
             }
         });
 
+        /**
+         * reinicia los valores del temporizador a cero y
+         * restaura la interfaz visual a su estado inicial
+         * @param v La vista (botón) que fue pulsado
+         * @return void No retorna ningún valor
+         * @throws No lanza excepciones controladas
+         */
         btnDetenerTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +141,13 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
             }
         });
 
+        /**
+         * Guarda los datos de la última sesión en la memoria global
+         * y redirige a la pantalla de historial de estudio
+         * @param v La vista (botón) que fue pulsado
+         * @return void No retorna ningún valor
+         * @throws No lanza excepciones controladas
+         */
         btnIrHistorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +172,12 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
             }
         });
 
+        /**
+         * nos redirige a traves de un intent a la pantalla de perfil de usuario
+         * @param v La vista (botón) que fue pulsado
+         * @return void No retorna ningún valor
+         * @throws No lanza excepciones controladas
+         */
         btnIrPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
