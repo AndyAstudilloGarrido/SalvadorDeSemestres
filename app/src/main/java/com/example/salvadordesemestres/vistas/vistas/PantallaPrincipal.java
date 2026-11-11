@@ -164,6 +164,12 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
                         ultimaDescrpcion = "no sabes que estudiaste";
                     }
 
+                    android.content.SharedPreferences preferencias = getSharedPreferences("MisSesiones", MODE_PRIVATE);
+                    String correoActual = preferencias.getString("correoUsuario", "");
+
+                    com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(PantallaPrincipal.this);
+                    dbHelper.insertarSesion(correoActual, ultimoTemaTerminado, ultimaDescrpcion, ultimoTiempoTerminado);
+
                     String registro = ultimoTemaTerminado + " | " + ultimaDescrpcion + " | " + ultimoTiempoTerminado;
                     DatosGlobales.historialCompleto.add(registro);
 

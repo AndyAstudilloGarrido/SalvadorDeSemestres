@@ -29,4 +29,14 @@ public final class UsuarioContract {
 
         public static final String CLUMN_TELEFONO = "telefono";
     }
+
+
+    public static class SesionEntry implements BaseColumns {
+        public static final String TABLE_NAME = "sesiones_estudio";
+
+        public static final String COLUMN_CORREO_USUARIO = "correo_usuario";
+        public static final String COLUMN_TEMA = "tema";
+        public static final String COLUMN_DESCRIPCION = "descripcion";
+        public static final String COLUMN_TIEMPO = "tiempo";
+    }
 }

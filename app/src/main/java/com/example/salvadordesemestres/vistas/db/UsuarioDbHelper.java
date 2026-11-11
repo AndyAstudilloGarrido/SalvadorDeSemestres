@@ -12,10 +12,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class UsuarioDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "SalvadroDeSemestres.db";
 
-    private static final String SQL_CREATE_ENTRIES =
+    private static final String SQL_CREATE_USUARIOS =
             "CREATE TABLE " + UsuarioContract.UsuarioEntry.TABLE_NAME + " (" +
                     UsuarioContract.UsuarioEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     UsuarioContract.UsuarioEntry.COLUMN_NOMBRE + " TEXT NOT NULL, " +
@@ -23,6 +23,13 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
                     UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA + " TEXT NOT NULL, " +
                     UsuarioContract.UsuarioEntry.CLUMN_TELEFONO + " TEXT)";
 
+    private static final String SQL_CREATE_SESIONES =
+            "CREATE TABLE " + UsuarioContract.SesionEntry.TABLE_NAME + " (" +
+                    UsuarioContract.SesionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    UsuarioContract.SesionEntry.COLUMN_CORREO_USUARIO + " TEXT NOT NULL, " +
+                    UsuarioContract.SesionEntry.COLUMN_TEMA + " TEXT NOT NULL, " +
+                    UsuarioContract.SesionEntry.COLUMN_DESCRIPCION + " TEXT, " +
+                    UsuarioContract.SesionEntry.COLUMN_TIEMPO + " TEXT NOT NULL)";
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + UsuarioContract.UsuarioEntry.TABLE_NAME;
 
@@ -45,9 +52,9 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db){
-        db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(SQL_CREATE_USUARIOS);
+        db.execSQL(SQL_CREATE_SESIONES);
     }
-
     /**
      * Recrea las tablas si se detecta una nueva versión de la base de datos.
      * @param db La instancia de la base de datos SQLite, oldVersion Número de versión anterior, newVersion Número de versión nueva.
@@ -56,7 +63,8 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        db.execSQL(SQL_DELETE_ENTRIES);
+        db.execSQL("DROP TABLE IF EXISTS " + UsuarioContract.UsuarioEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + UsuarioContract.SesionEntry.TABLE_NAME);
         onCreate(db);
     }
 
@@ -131,4 +139,44 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
             return contrasena;
         }
     }
+    /**
+     * guarda las sesiones de estudio en la base de datos
+     * @param correoUsuario Correo del usuario activo, tema Nombre de la materia estudiada, descripcion Nota de aprendizaje, Minutos de duración.
+     * @return boolean true si se guardó con éxito.
+     * @throws Exception no cuenta con excepciones controladas.
+     */
+    public boolean insertarSesion(String correoUsuario, String tema, String descripcion, String tiempo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        android.content.ContentValues values = new android.content.ContentValues();
+        values.put(UsuarioContract.SesionEntry.COLUMN_CORREO_USUARIO, correoUsuario);
+        values.put(UsuarioContract.SesionEntry.COLUMN_TEMA, tema);
+        values.put(UsuarioContract.SesionEntry.COLUMN_DESCRIPCION, descripcion);
+        values.put(UsuarioContract.SesionEntry.COLUMN_TIEMPO, tiempo);
+
+        long result = db.insert(UsuarioContract.SesionEntry.TABLE_NAME, null, values);
+        db.close();
+        return result != -1;
+    }
+
+    /**
+     * busca y muestra todas las sesiones de estudio registrada del usuario.
+     * @param correoUsuario Correo del usuario activo.
+     * @return Cursor Registros encontrados.
+     * @throws Exception no cuenta con excepciones controladas.
+     */
+    public android.database.Cursor obtenerSesionesPorUsuario(String correoUsuario) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = UsuarioContract.SesionEntry.COLUMN_CORREO_USUARIO + " = ?";
+        String[] selectionArgs = { correoUsuario };
+
+        return db.query(
+                UsuarioContract.SesionEntry.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null, null,
+                UsuarioContract.SesionEntry._ID + " DESC"
+        );
+    }
+
 }

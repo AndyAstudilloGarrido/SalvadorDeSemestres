@@ -47,17 +47,24 @@ public class HistorialDeEstudio extends AppCompatActivity {
         tablaHistorial = findViewById(R.id.tableHistorial);
         btnVolver = findViewById(R.id.btnVolverHistorial);
 
-        for (int i = 0; i < DatosGlobales.historialCompleto.size(); i++){
-            String registroString = DatosGlobales.historialCompleto.get(i);
-            String[] partes = registroString.split("\\| ");
+        android.content.SharedPreferences preferencias = getSharedPreferences("MisSesiones", MODE_PRIVATE);
+        String correoActual = preferencias.getString("correoUsuario", "");
 
-            if(partes.length == 3){
-                String tema = partes[0];
-                String desc = partes[1];
-                String tiempo = partes[2];
+        com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(this);
+        android.database.Cursor cursor = dbHelper.obtenerSesionesPorUsuario(correoActual);
 
-                agregarFila(String.valueOf(i + 1), tema, desc, tiempo);
-            }
+        int contador = 1;
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String tema = cursor.getString(cursor.getColumnIndexOrThrow(com.example.salvadordesemestres.vistas.db.UsuarioContract.SesionEntry.COLUMN_TEMA));
+                String desc = cursor.getString(cursor.getColumnIndexOrThrow(com.example.salvadordesemestres.vistas.db.UsuarioContract.SesionEntry.COLUMN_DESCRIPCION));
+                String tiempo = cursor.getString(cursor.getColumnIndexOrThrow(com.example.salvadordesemestres.vistas.db.UsuarioContract.SesionEntry.COLUMN_TIEMPO));
+
+                agregarFila(String.valueOf(contador), tema, desc, tiempo);
+                contador++;
+            } while (cursor.moveToNext());
+
+            cursor.close();
         }
 
         /**
