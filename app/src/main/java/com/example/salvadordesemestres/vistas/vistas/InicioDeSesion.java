@@ -48,10 +48,9 @@ public class InicioDeSesion extends AppCompatActivity{
             /**
              * Evento que lanza un hilo secundario para verificar el correo y contraseña
              * en la base de datos sin congelar la UI
-             *
              * @param v La vista que fue pulsada
              * @return void no retorna valor alguno
-             * @throws Exception No lanza excepciones controladas.
+             * @throws Exception no cuenta con exceptiones controladas.
              */
             @Override
             public void onClick(View v){

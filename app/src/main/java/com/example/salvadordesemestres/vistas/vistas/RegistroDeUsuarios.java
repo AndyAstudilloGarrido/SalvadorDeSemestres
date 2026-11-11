@@ -16,6 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.salvadordesemestres.R;
 import com.example.salvadordesemestres.vistas.db.UsuarioContract;
 
+/**
+ * Activity que permite registrar nuevas cuentas de usuario,
+ * realizando una inserción en la base de datos local SQLite.
+ * @param Ninguno
+ * @return void no retorna nada
+ * @throws Exception no cuenta con exceptiones controladas.
+ */
 public class RegistroDeUsuarios extends AppCompatActivity {
 
     EditText etNombreUsuario;

@@ -15,6 +15,12 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.salvadordesemestres.R;
 import com.example.salvadordesemestres.vistas.db.UsuarioDbHelper;
 
+/**
+ * Activity encargada de actualizar (Update) la contraseña del usuario activo en SQLite.
+ * @param Ninguno
+ * @return void no retorna nada
+ * @throws Exception no cuenta con exceptiones controladas
+ */
 public class CambiarClave extends AppCompatActivity {
 
     EditText etClaveNueva;
@@ -40,6 +46,12 @@ public class CambiarClave extends AppCompatActivity {
         android.content.SharedPreferences preferencias = getSharedPreferences("MisSesiones", MODE_PRIVATE);
         String correoActual = preferencias.getString("correoUsuario", "");
 
+        /**
+         * Captura la nueva contraseña e invoca el metodo para actualizar en SQLite.
+         * @param v La vista (botón) que fue pulsado
+         * @return void no retorna valor alguno
+         * @throws no cuenta con exceptiones controladas
+         */
         btnGuardarClave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

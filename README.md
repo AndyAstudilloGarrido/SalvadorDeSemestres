@@ -2,6 +2,22 @@
 
 Una aplicación móvil para Android creada para ayudar a los estudiantes a organizar sus tiempos de estudio. Funciona como un temporizador inteligente que además guarda un registro de todo lo que has estudiado.
 
+---
+
+## Diagramas del Sistema (Flujo & Base de Datos)
+
+### Diagrama de Flujo
+| Flujo Completo de la Aplicación |
+| --- |
+| <img src="documentos/Diagrama_de_flujo_Salvador_de_semestres.png" width="700"> |
+
+### Modelo Entidad-Relación (Base de Datos SQLite)
+| Diagrama MER (Tablas y Relaciones) |
+| --- |
+| <img src="documentos/MER_Salvador_de_Semestres.png" width="700"> |
+
+---
+
 ##  ¿Qué hace la aplicación?
 
 *   **Crear cuenta y Login:** Puedes registrarte y tu cuenta quedará guardada en tu teléfono. La app recordará tu sesión abierta para que no tengas que entrar tu clave cada vez.
@@ -11,6 +27,7 @@ Una aplicación móvil para Android creada para ayudar a los estudiantes a organ
 *   **Tu Perfil:** Una pantalla donde puedes ver cuántos minutos y sesiones llevas en total. También puedes cambiar tu contraseña o borrar tu cuenta para siempre.
 *   **Mensajes de apoyo:** Si te estresas y agitas el teléfono mientras estudias, la app detectará el movimiento y te mandará un mensaje motivacional.
 
+
 ## Herramientas utilizadas 
 
 *   **Diseño (XML):** Uso de `ConstraintLayout` para que las pantallas se adapten bien al celular, y uso de menús desplegables (`Spinner`).
@@ -19,3 +36,18 @@ Una aplicación móvil para Android creada para ayudar a los estudiantes a organ
 *   **Intents:** Para viajar de una pantalla a otra y llevar información de la sesión.
 *   **Sensor de Hardware:** Uso del acelerómetro del celular.
 *   **Hilos:** Para buscar a los usuarios en la base de datos sin que la pantalla se quede pegada mientras busca.
+
+---
+
+## Arquitectura del Proyecto
+
+
+
+```text
+app/
+ └── src/
+      └── main/
+           ├── java/com/example/salvadordesemestres/vistas/
+           │    ├── db/        # Clases de Base de Datos (UsuarioContract, UsuarioDbHelper)
+           │    └── vistas/    # Vistas e Interfaz (Activities, DatosGlobales)
+           └── [AndroidManifest.xml]

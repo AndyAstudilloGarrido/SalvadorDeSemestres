@@ -23,6 +23,12 @@ import android.widget.Toast;
 
 import com.example.salvadordesemestres.R;
 
+/**
+ * Activity principal que gestiona el cronómetro de estudio, el Spinner de tiempos y el acelerómetro.
+ * @param Ninguno
+ * @return void no retorna nada.
+ * @throws Exception no cuenta con exceptiones controladas.
+ */
 public class PantallaPrincipal extends AppCompatActivity implements SensorEventListener {
 
     EditText etTemaEstudio, etDescripcionFinal;
@@ -76,7 +82,7 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
          * Gestiona el inicio y pausa del cronómetro y cambia el estado visual del botón
          * @param v La vista (botón) que fue pulsado
          * @return void No retorna valor alguno
-         * @throws No lanza excepciones controladas
+         * @throws no cuenta con exceptiones controladas
          */
         btnIniciarTimer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +128,7 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
          * restaura la interfaz visual a su estado inicial
          * @param v La vista (botón) que fue pulsado
          * @return void No retorna ningún valor
-         * @throws No lanza excepciones controladas
+         * @throws no cuenta con exceptiones controladas
          */
         btnDetenerTimer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +152,7 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
          * y redirige a la pantalla de historial de estudio
          * @param v La vista (botón) que fue pulsado
          * @return void No retorna ningún valor
-         * @throws No lanza excepciones controladas
+         * @throws no cuenta con exceptiones controladas
          */
         btnIrHistorial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +182,7 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
          * nos redirige a traves de un intent a la pantalla de perfil de usuario
          * @param v La vista (botón) que fue pulsado
          * @return void No retorna ningún valor
-         * @throws No lanza excepciones controladas
+         * @throws no cuenta con exceptiones controladas
          */
         btnIrPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +193,12 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
         });
     }
 
+    /**
+     * Inicia un CountDownTimer con el tiempo en milisegundos seleccionado y actualiza la UI.
+     * @param tema El nombre del ramo o materia que el usuario va a estudiar.
+     * @return void no retorna nada
+     * @throws Exception no cuenta con exceptiones controladas.
+     */
     private void iniciarCronometro(String tema){
         temporizador = new CountDownTimer(tiempoMilisegundos, 1000) {
             @Override
@@ -214,6 +226,12 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
         Toast.makeText(this, "Empezando a estudiar: " + tema, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Formatea el tiempo restante en milisegundos a un formato de reloj legible (MM:SS).
+     * @param Ninguno
+     * @return void no retorna nada
+     * @throws Exception no cuenta con exceptiones controladas.
+     */
     private void actualizarTextoCronometro(){
         int minutos = (int) (tiempoMilisegundos / 1000) / 60;
         int segundos = (int) (tiempoMilisegundos / 1000) % 60;
@@ -222,6 +240,12 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
         tvCronometro.setText((tiempoFormateado));
     }
 
+    /**
+     * Captura las lecturas del acelerómetro en tiempo real y muestra un mensaje motivacional si detecta una sacudida fuerte.
+     * @param event El evento del sensor con las coordenadas X, Y y Z.
+     * @return void no retorna nada
+     * @throws Exception no cuenta con exceptiones controladas.
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -247,6 +271,12 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
+    /**
+     * Registra y enciende el escuchador del acelerómetro cuando la pantalla está activa.
+     * @param Ninguno
+     * @return void no retorna nada
+     * @throws Exception no cuenta con exceptiones controladas.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -255,6 +285,12 @@ public class PantallaPrincipal extends AppCompatActivity implements SensorEventL
         }
     }
 
+    /**
+     * Apaga y desregistra el oyente del sensor acelerómetro para no gastar batería cuando la app pasa a segundo plano.
+     * @param Ninguno
+     * @return void no retorna nada
+     * @throws Exception no cuenta con exceptiones controladas.
+     */
     @Override
     protected void onPause() {
         super.onPause();

@@ -13,6 +13,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.salvadordesemestres.R;
 
+/**
+ * Activity principal que sirve como punto de entrada de la aplicación.
+ * Evalúa si existe una sesión previa en SharedPreferences para redirigir automáticamente
+ * o permite navegar al Inicio de Sesión y Registro.
+ * @param Ninguno
+ * @return void no retorna nada
+ * @throws Exception no cuenta con exceptiones controladas.
+ */
 public class MainActivity extends AppCompatActivity {
 
     Button btnIniciarSesion;

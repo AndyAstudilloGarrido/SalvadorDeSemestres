@@ -15,6 +15,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.salvadordesemestres.R;
 
+/**
+ * Activity que muestra las estadísticas globales del usuario (sesiones y minutos)
+ * y permite gestionar la cuenta, como cambiar clave, eliminar la cuenta y cerrar sesion.
+ * @param Ninguno
+ * @return void no retorna nada
+ * @throws Exception no cuenta con exceptiones controladas.
+ */
 public class PerfilUsuario extends AppCompatActivity {
 
     TextView tvTotalSesiones;
@@ -54,6 +61,12 @@ public class PerfilUsuario extends AppCompatActivity {
         tvTotalMinutos.setText("Minutos estudiados: " + minutos);
 
 
+        /**
+         * Cierra la pantalla de Perfil y regresa a la vista anterior.
+         * @param v La vista (botón) que fue pulsado
+         * @return void no retorna valor alguno
+         * @throws no cuenta con exceptiones controladas
+         */
         btnVolver.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(android.view.View v){
@@ -67,6 +80,12 @@ public class PerfilUsuario extends AppCompatActivity {
 
         com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(this);
 
+        /**
+         * Redirige al usuario a la vista para cambiar su contraseña.
+         * @param v La vista (botón) que fue pulsado
+         * @return void no retorna valor alguno
+         * @throws no cuenta con exceptiones controladas
+         */
         btnActualizarClave.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
@@ -75,6 +94,12 @@ public class PerfilUsuario extends AppCompatActivity {
             }
         });
 
+        /**
+         * Despliega un cuadro de alerta para confirmar y eliminar la cuenta del usuario en SQLite.
+         * @param v La vista (botón) que fue pulsado
+         * @return void no retorna valor alguno
+         * @throws no cuenta con exceptiones controladas
+         */
         btnEliminarCuenta.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
@@ -100,6 +125,12 @@ public class PerfilUsuario extends AppCompatActivity {
             }
         });
 
+        /**
+         * Borra la sesión activa de SharedPreferences y redirige al inicio cerrando todas las vistas.
+         * @param v La vista (botón) que fue pulsado
+         * @return void no retorna valor alguno
+         * @throws no cuenta con exceptiones controladas
+         */
         btnCerrarSesion.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(android.view.View v) {

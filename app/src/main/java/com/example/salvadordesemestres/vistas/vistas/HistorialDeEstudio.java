@@ -18,6 +18,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.salvadordesemestres.R;
 
+/**
+ * Activity que dibuja dinámicamente una tabla (TableLayout) con todos los registros
+ * de estudio almacenados en la lista global de DatosGlobales.
+ * @param Ninguno
+ * @return no retorna nada
+ * @throws Exception no cuenta con exceptiones controladas.
+ */
+
 public class HistorialDeEstudio extends AppCompatActivity {
 
     TableLayout tablaHistorial;
@@ -52,7 +60,12 @@ public class HistorialDeEstudio extends AppCompatActivity {
             }
         }
 
-
+        /**
+         * Cierra la pantalla del Historial y regresa al cronómetro.
+         * @param v La vista (botón) que fue pulsado
+         * @return void no retorna valor alguno
+         * @throws no cuenta con exceptiones controladas
+         */
         btnVolver.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(android.view.View v){
@@ -61,6 +74,12 @@ public class HistorialDeEstudio extends AppCompatActivity {
         });
     }
 
+    /**
+     * Explicación: Genera dinámicamente un TextView (celda).
+     * @param texto El contenido en String que mostrará la celda.
+     * @return TextView El elemento visual configurado.
+     * @throws Exception no cuenta con exceptiones controladas.
+     */
     private TextView crearCelda(String texto){
         TextView celda = new TextView(this);
         celda.setText(texto);
@@ -80,6 +99,13 @@ public class HistorialDeEstudio extends AppCompatActivity {
         return celda;
     }
 
+    /**
+     * Explicación: Crea un nuevo TableRow y le inserta celdas para armar la fila del historial.
+     * @param id Identificador numérico de la fila, ramo Tema estudiado, descripcion Nota o aprendizaje ingresado por el usuario,
+     * tiempo Duración de la sesión.
+     * @return void No retorna ningún valor.
+     * @throws Exception no cuenta con exceptiones controladas.
+     */
     private void agregarFila(String id, String ramo, String descripcion, String tiempo){
         TableRow nuevaFila = new TableRow(this);
         nuevaFila.setBackgroundColor(Color.WHITE);
