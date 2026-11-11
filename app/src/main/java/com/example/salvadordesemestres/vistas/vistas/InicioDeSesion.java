@@ -73,11 +73,13 @@ public class InicioDeSesion extends AppCompatActivity{
                     public void run() {
                         com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(InicioDeSesion.this);
                         android.database.sqlite.SQLiteDatabase db = dbHelper.getReadableDatabase();
+                        String claveEncriptada = com.example.salvadordesemestres.vistas.db.UsuarioDbHelper.encriptarPBKDF2(contrasena);
+
 
                         String[] projection = { com.example.salvadordesemestres.vistas.db.UsuarioContract.UsuarioEntry._ID };
                         String selection = com.example.salvadordesemestres.vistas.db.UsuarioContract.UsuarioEntry.COLUMN_CORREO + " = ? AND " +
                                 com.example.salvadordesemestres.vistas.db.UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA + " = ?";
-                        String[] selectionArgs = { correo, contrasena };
+                        String[] selectionArgs = { correo, claveEncriptada };
 
                         android.database.Cursor cursor = db.query(
                                 com.example.salvadordesemestres.vistas.db.UsuarioContract.UsuarioEntry.TABLE_NAME,

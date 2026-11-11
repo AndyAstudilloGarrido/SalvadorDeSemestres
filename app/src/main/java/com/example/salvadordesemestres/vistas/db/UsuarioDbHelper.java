@@ -70,7 +70,8 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         android.content.ContentValues values = new android.content.ContentValues();
 
-        values.put(UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA, nuevaContrasena);
+        String claveEncriptada = encriptarPBKDF2(nuevaContrasena);
+        values.put(UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA, claveEncriptada);
 
         String selection = UsuarioContract.UsuarioEntry.COLUMN_CORREO + " = ?";
         String[] selectionArgs = { correo };
@@ -81,19 +82,53 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Realiza la operación Delete eliminando el usuario de SQLite según su correo.
-     * @param correo Correo del usuario a eliminar.
+     * Realiza un barrodado logico en lugar de un borrado fisico, mantiene la integridad la integridad de la base de datos..
+     * @param correo Correo del usuario a desactivar.
      * @return int Cantidad de filas eliminadas en la base de datos.
      * @throws Exception no cuenta con excepciones controladas.
      */
     public int eliminarUsuario(String correo){
         SQLiteDatabase db = this.getWritableDatabase();
+        android.content.ContentValues values = new android.content.ContentValues();
+
+        values.put(UsuarioContract.UsuarioEntry.COLUMN_NOMBRE, "Usuario Eliminado");
+        values.put(UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA, "INACTIVO_DESACTIVADO");
+        values.putNull(UsuarioContract.UsuarioEntry.CLUMN_TELEFONO);
 
         String selection = UsuarioContract.UsuarioEntry.COLUMN_CORREO + " = ?";
         String[] selectionArgs = { correo };
 
-        int deleteRows = db.delete(UsuarioContract.UsuarioEntry.TABLE_NAME, selection, selectionArgs);
+        int count = db.update(UsuarioContract.UsuarioEntry.TABLE_NAME, values, selection, selectionArgs);
         db.close();
-        return deleteRows;
+        return count;
+    }
+
+    /**
+     * Encripta una contraseña utilizando el algoritmo PBKDF2 con HmacSHA256 y 10,000 iteraciones.
+     * @param contrasena La contraseña ingresada por el usuario en texto plano.
+     * @return String La contraseña encriptada en formato hexadecimal PBKDF2.
+     * @throws Exception no cuenta con excepciones controladas
+     */
+    public static String encriptarPBKDF2(String contrasena) {
+        try {
+            char[] passwordChars = contrasena.toCharArray();
+            byte[] salt = "SalvadorDeSemestresSalt2026".getBytes(java.nio.charset.StandardCharsets.UTF_8);
+            int iterations = 10000;
+            int keyLength = 256;
+
+            javax.crypto.spec.PBEKeySpec spec = new javax.crypto.spec.PBEKeySpec(passwordChars, salt, iterations, keyLength);
+            javax.crypto.SecretKeyFactory skf = javax.crypto.SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+            byte[] hash = skf.generateSecret(spec).getEncoded();
+
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (Exception e) {
+            return contrasena;
+        }
     }
 }

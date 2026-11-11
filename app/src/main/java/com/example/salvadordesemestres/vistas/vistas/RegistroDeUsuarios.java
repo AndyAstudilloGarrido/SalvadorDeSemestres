@@ -70,11 +70,12 @@ public class RegistroDeUsuarios extends AppCompatActivity {
 
                 com.example.salvadordesemestres.vistas.db.UsuarioDbHelper dbHelper = new com.example.salvadordesemestres.vistas.db.UsuarioDbHelper(RegistroDeUsuarios.this);
                 android.database.sqlite.SQLiteDatabase db = dbHelper.getWritableDatabase();
+                String claveEncriptada = com.example.salvadordesemestres.vistas.db.UsuarioDbHelper.encriptarPBKDF2(contrasena);
 
                 android.content.ContentValues values = new android.content.ContentValues();
                 values.put(UsuarioContract.UsuarioEntry.COLUMN_NOMBRE, nombre);
                 values.put(UsuarioContract.UsuarioEntry.COLUMN_CORREO, correo);
-                values.put(UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA, contrasena);
+                values.put(UsuarioContract.UsuarioEntry.COLUMN_CONTRASENA, claveEncriptada);
                 values.put(UsuarioContract.UsuarioEntry.CLUMN_TELEFONO, telefono);
 
                 long newRowId = db.insert(UsuarioContract.UsuarioEntry.TABLE_NAME, null, values);
