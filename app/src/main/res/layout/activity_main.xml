@@ -5,56 +5,74 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_app"
+    android:padding="24dp"
     tools:context=".vistas.vistas.MainActivity">
 
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginTop="32dp"
         android:text="SalvadorDeSemestres"
+        android:textColor="@color/primary"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnIniciarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="138dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="139dp"
-        android:text="Iniciar Sesión"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardImagen"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo">
 
-    <Button
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/imagen_de_inicio" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:text="Iniciar Sesión"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primary"
+        app:cornerRadius="16dp"
+        app:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardImagen" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegistrarse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="138dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="139dp"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
         android:text="Registrarse"
+        android:textColor="@color/primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="16dp"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="205dp"
-        android:layout_height="267dp"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="103dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
-        app:srcCompat="@drawable/imagen_de_inicio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

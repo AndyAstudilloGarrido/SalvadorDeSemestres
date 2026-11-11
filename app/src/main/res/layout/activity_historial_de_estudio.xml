@@ -5,91 +5,113 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_app"
+    android:padding="20dp"
     tools:context=".vistas.vistas.HistorialDeEstudio">
 
     <TextView
         android:id="@+id/tvTituloHistorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="105dp"
+        android:layout_marginTop="20dp"
         android:text="Historial de Estudio"
-        android:textSize="24sp"
+        android:textColor="@color/text_dark"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TableLayout
-        android:id="@+id/tableHistorial"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTabla"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="16dp"
-        android:background="#000000"
-        android:padding="1dp"
-        android:stretchColumns="*"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/card_bg"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnVolverHistorial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTituloHistorial">
 
-        <TableRow android:background="#FFFFFF">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:id="@+id/tableHistorial"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:background="#C8E6C9"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="ID"
-                android:textStyle="bold" />
+                android:background="#E2E8F0"
+                android:padding="1dp"
+                android:stretchColumns="*">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:background="#C8E6C9"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Ramo"
-                android:textStyle="bold" />
+                <TableRow android:background="@color/primary">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:background="#C8E6C9"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Descripción"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:background="@color/primary"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="ID"
+                        android:textColor="@color/card_bg"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:background="#C8E6C9"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Tiempo"
-                android:textStyle="bold" />
-        </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:background="@color/primary"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Ramo"
+                        android:textColor="@color/card_bg"
+                        android:textStyle="bold" />
 
-    </TableLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:background="@color/primary"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Descripción"
+                        android:textColor="@color/card_bg"
+                        android:textStyle="bold" />
 
-    <Button
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:background="@color/primary"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Tiempo"
+                        android:textColor="@color/card_bg"
+                        android:textStyle="bold" />
+                </TableRow>
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnVolverHistorial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="504dp"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
         android:text="Volver a estudiar"
+        app:backgroundTint="@color/accent"
+        app:cornerRadius="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableHistorial" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

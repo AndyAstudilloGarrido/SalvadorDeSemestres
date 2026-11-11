@@ -5,112 +5,144 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_app"
+    android:padding="20dp"
     tools:context=".vistas.vistas.PerfilUsuario">
-
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="146dp"
-        android:src="@drawable/ic_perfil_usuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="117dp"
+        android:layout_marginTop="20dp"
         android:text="Perfil de Estudio"
-        android:textSize="24sp"
+        android:textColor="@color/text_dark"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardAvatar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="177dp"
-        android:text="Tus Estadísticas de Hoy"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <TextView
-        android:id="@+id/tvTotalSesiones"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="195dp"
-        android:text="Sesiones completadas: 0"
-        android:textSize="18sp"
+        app:cardBackgroundColor="@color/card_bg"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-    <TextView
-        android:id="@+id/tvTotalMinutos"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_perfil_usuario" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Tus Estadísticas Acumuladas"
+                android:textColor="@color/text_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTotalSesiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Sesiones completas: 0"
+                android:textColor="@color/text_muted"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvTotalMinutos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Minutos estudiados: 0"
+                android:textColor="@color/text_muted"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardAcciones"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="218dp"
-        android:text="Minutos estudiados: 0"
-        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/card_bg"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotalSesiones" />
+        app:layout_constraintTop_toBottomOf="@+id/cardAvatar">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnActualizarClave"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Actualizar Contraseña"
+                android:textColor="@color/primary"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/primary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:text="Cerrar Sesión"
+                app:backgroundTint="@color/primary"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEliminarCuenta"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:text="Eliminar Cuenta"
+                android:textColor="@color/danger"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/danger" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnVolverPerfil"
-        android:layout_width="171dp"
-        android:layout_height="54dp"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
         android:text="Volver a estudiar"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="574dp" />
-
-    <Button
-        android:id="@+id/btnActualizarClave"
-        android:layout_width="191dp"
-        android:layout_height="59dp"
-        android:layout_marginHorizontal="32dp"
-        android:text="Actualizar contraseña"
-        tools:layout_editor_absoluteX="204dp"
-        tools:layout_editor_absoluteY="574dp" />
-
-    <Button
-        android:id="@+id/btnEliminarCuenta"
-        android:layout_width="184dp"
-        android:layout_height="51dp"
-        android:layout_marginHorizontal="32dp"
-        android:backgroundTint="#D32F2F"
-        android:text="Eliminar Cuenta"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="646dp" />
-
-    <Button
-        android:id="@+id/btnCerrarSesion"
-        android:layout_width="184dp"
-        android:layout_height="51dp"
-        android:layout_marginHorizontal="32dp"
-        android:backgroundTint="#D32F2F"
-        android:text="Cerrar sesión"
-        tools:layout_editor_absoluteX="211dp"
-        tools:layout_editor_absoluteY="646dp" />
+        app:backgroundTint="@color/accent"
+        app:cornerRadius="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardAcciones" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
