@@ -18,7 +18,9 @@ Una aplicación móvil para Android creada para ayudar a los estudiantes a organ
 
 ---
 
-##  ¿Qué hace la aplicación?
+
+
+## ¿Qué hace la aplicación?
 
 *   **Crear cuenta y Login:** Puedes registrarte y tu cuenta quedará guardada en tu teléfono. La app recordará tu sesión abierta para que no tengas que entrar tu clave cada vez.
 *   **Estudiar:** Tienes un cronómetro donde puedes elegir cuánto tiempo quieres estudiar (15, 25 o 45 minutos). Puedes pausarlo el tiempo o detenerlo en cualquier momento.
@@ -42,6 +44,7 @@ Una aplicación móvil para Android creada para ayudar a los estudiantes a organ
 ## Arquitectura del Proyecto
 
 
+## Arquitectura del Proyecto
 
 ```text
 app/
@@ -50,4 +53,5 @@ app/
            ├── java/com/example/salvadordesemestres/vistas/
            │    ├── db/        # Clases de Base de Datos (UsuarioContract, UsuarioDbHelper)
            │    └── vistas/    # Vistas e Interfaz (Activities, DatosGlobales)
-           └── [AndroidManifest.xml]
+           └── AndroidManifest.xml
+```
